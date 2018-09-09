@@ -11,6 +11,11 @@ include_once '../db/dbconn.php';
       while($row = $result->fetch_assoc()) {
           if ($code == $row["email_verification_code"]) {
             //success
+            $sql = "UPDATE users SET active=1 WHERE id = '$user'";
+
+            if ($conn->query($sql) === TRUE) {
+              //success
+            }
           }
       }
   }
