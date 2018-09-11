@@ -1,6 +1,7 @@
 <?php
 session_start();
 include_once '../db/dbconn.php';
+include_once '../login/keepSession.php';
 
 $price = $_SESSION["price"];
 $title = $_SESSION["title"];
@@ -13,12 +14,10 @@ $catagory = $_SESSION["catagory"];
   $sql = "INSERT INTO adverts (price, ad_title, ad_description, nego, contact, user_id, ad_catagory, locations_id)
   VALUES ('$price', '$title', '$description', '$nego', '$contact', '$user_id', '$catagory', '$location')";
 
-  if ($active == 1) {
-    if ($conn->query($sql) === TRUE) {
-        $_SESSION["return"] = "Your Ad is posted";
-    } else {
-        $_SESSION["return"] = "Something went wrong";
-    }
+  if ($conn->query($sql) === TRUE) {
+      $_SESSION["return"] = "Your Ad is posted";
+  } else {
+      $_SESSION["return"] = "Something went wrong";
   }
 
 $conn->close();
